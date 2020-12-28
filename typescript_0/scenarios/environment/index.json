@@ -1,0 +1,39 @@
+{
+  "title": "environment of typescript",
+  "description": "environment of typescript",
+  "difficulty": "Beginner",
+  "time": "10m",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4",
+        "text": "step4.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "showide": true
+  },
+  "backend": {
+    "imageid": "nodejs:12",
+    "uilayout": "vscode-terminal-split"
+  }
+}
