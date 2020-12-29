@@ -26,10 +26,8 @@
     }
   },
   "environment": {
-    "uieditorpath": "/root/example",
-    "showide": true,
-    "idePort": 23000,
-    "uilayout": "terminal"
+    "hidefinish": true,
+    "uilayout": "vscode-terminal-split"
   },
   "backend": {
     "imageid": "nodejs:12"
