@@ -1,6 +1,6 @@
 {
-  "title": "environment of typescript",
-  "description": "environment of typescript",
+  "title": "environment",
+  "description": "environment",
   "difficulty": "Beginner",
   "time": "10m",
   "details": {
@@ -16,10 +16,6 @@
       {
         "title": "Step 3",
         "text": "step3.md"
-      },
-      {
-        "title": "Step 4",
-        "text": "step4.md"
       }
     ],
     "intro": {
@@ -30,10 +26,12 @@
     }
   },
   "environment": {
-    "showide": true
+    "uieditorpath": "/root/example",
+    "showide": true,
+    "idePort": 23000,
+    "uilayout": "terminal"
   },
   "backend": {
-    "imageid": "nodejs:12",
-    "uilayout": "vscode-terminal-split"
+    "imageid": "nodejs:12"
   }
 }
