@@ -1,94 +1,101 @@
-# React
+# Expressを使用したHttpサーバ
+Expressを使用して、JSONデータを返却するHttpサーバを作成します。
 
 ### ソースディレクトリの作成
-`mkdir src/client`{{execute}}
+`mkdir src/server`{{execute}}
 
 ### TypeScriptコンパイラの初期設定
 - 以下のコマンドでtsconfig.jsonが生成されます。tsconfig.jsonはTypeScriptコンパイラ（tsc）の設定ファイルです。<br />
  `npx tsc --init`{{execute}}
 
 - 今回は、サーバ用とクライアント用のtsconfig.jsonの２ファイルを使用するので、tsconfig.jsonをrenameします。<br />
- `mv tsconfig.json tsconfig.client.json`{{execute}}
+ `mv tsconfig.json tsconfig.server.json`{{execute}}
 
 ### TypeScriptコンパイラ（tsc）の設定ファイルの変更
-`example/tsconfig.client.json`{{open}}に以下の変更を行います。<br />
+`example/tsconfig.server.json`{{open}}に以下の変更を行います。<br />
 
-`
+```
 {
-  "compilerOptions": {
-      "sourceMap": true,
-      "target": "ES2019",
-      "module": "esnext",
-      "jsx": "react",
-      "lib": [
-        "es2017",
-        "dom"
-      ],
-      "allowSyntheticDefaultImports": true
-  },
-  "include": [
-    "./src/client/*"
-  ]
+    "compilerOptions": {
+        "sourceMap": true,
+        "target": "ES2019",
+        "module": "commonjs",
+        "outDir": "./dest",
+        "strict": true,
+        "strictPropertyInitialization": false ,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "./src/server/*",
+    ]
 }
-`{{copy}}
+```{{copy}}
 
-### ライブラリのインストール
-`npm install --save bootstrap-css-only react react-dom`{{execute}}
+### Expressライブラリのインストール
+`npm install --save express`{{execute}}
 
 ### 型定義のインストール
-`npm install --save-dev @types/node @types/reac @types/react-dom`{{execute}}
+`npm install --save-dev @types/node @types/express`{{execute}}
 
-### webpackと関連プラグインのインストール
-`npm install --save-dev webpack webpack-cli ts-loader css-loader style-loader`{{execute}}
+### ソースファイルの編集
+`example/src/server/server.ts`{{open}}に以下の変更を行います。<br />
 
-### クライアントコードの出力先ディレクトリを作成
-`mkdir dest/public`{{execute}}
+```
+import express, { Express, Request, Response} from 'express';
 
-### webpackの設定
-`example/webpack.config.js`{{open}}の作成します。以下の設定とします。
-
-`
-const path = require('path');
-
-module.exports = [
-    {
-        target: "web", 
-        mode: 'development',
-        entry: './src/client/client.tsx',
-        output: { // build時に出力する先
-          path: path.join(__dirname, "dest/public"),
-          filename: 'client.js'
-        },
-        module: {
-          rules: [
-            {
-              test: /\.tsx?$/,
-              use: {
-                loader: "ts-loader",
-                options: {
-                    transpileOnly: true,
-                    configFile: "tsconfig.client.json",
-                }
-              }
-            },
-            {
-                test: /\.css/,
-                use: [
-                  "style-loader",
-                  {
-                    loader: "css-loader",
-                    options: { url: false }
-                  }
-                ]
-              }
-          ]
-        },
-        resolve: {
-          extensions: [ // importできるファイルの拡張子
-            '.ts', '.tsx', '.js', '.json'
-          ],
-        },
-        devtool: 'inline-source-map',  // sourcemapを使えるようにする
+class Server {
+    private _express: Express;
+    constructor(private _port: number){
     }
-]
-`{{copy}}
+    start(){
+        this._express = express();
+        this._express.get('/now', (req, res)=> {
+            this.processNow(req, res);
+        });
+        this._express.listen(this._port);
+    }
+    private processNow(req: Request, res: Response){
+        const result =  {message: "Hello World.", datetime: (new Date()).toLocaleString() };
+        res.json(result);
+    }
+}
+
+let port: number
+if(process.argv.length >= 3) {
+    port = parseInt(process.argv[2]);
+}else{
+    console.error("Error: Illegal argument.")
+    process.exit(1);
+}
+
+const server = new Server(port);
+server.start();
+```{{copy}}
+
+### ビルド
+tscコマンドにて、JavaScriptに変換します<br />
+`npx tsc -p tsconfig.server.json`{{execute}}
+
+### サーバの起動
+`node ./dest/server.js 80 &`{{execute}}
+
+### package.jsonの修正
+package.jsonのscriptsに追加したほうが少し楽かと思います
+```
+"scripts": {
+    "build:server": "tsc -p tsconfig.server.json",
+    "start": "node ./dest/server.js 80 &"
+}
+```{{copy}}
+
+package.jsonに蒸気を追加すると、以下のようなコマンドにてビルドやサーバの起動が行えます
+- `npm run build:server`{{execute}}
+- `npm run start`{{execute}}
+
+### アクセステスト
+`curl localhost/now`{{execute}}
+
+### URL
+https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/now
