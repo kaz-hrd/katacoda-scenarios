@@ -13,7 +13,8 @@
 ### TypeScriptコンパイラ（tsc）の設定ファイルの変更
 `tsconfig.server.json`{{open}}に以下の変更を行います。
 
-    ```{
+    ```
+    {
         "compilerOptions": {
             "target": "ES2019",
             "module": "commonjs",
@@ -27,6 +28,7 @@
         "include": [
             "./src/server/*",
         ]
-    }```
+    }
+    ```
 
 
