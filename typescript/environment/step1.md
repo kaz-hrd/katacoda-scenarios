@@ -6,7 +6,7 @@
 3. `pwd`{{execute}}
 
 ### 環境初期化
-以下のコマンドでpackage.jsonが作成されます
+以下のコマンドでpackage.jsonが作成されます<br />
 `npm init -y`{{execute}}
 
 ### TypeScriptのインストール

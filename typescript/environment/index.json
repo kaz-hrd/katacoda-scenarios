@@ -26,6 +26,7 @@
     }
   },
   "environment": {
+    "uieditorpath": "/root/example",
     "hidefinish": true,
     "uilayout": "vscode-terminal-split"
   },
