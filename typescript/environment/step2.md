@@ -14,7 +14,7 @@ Expressを使用して、JSONデータを返却するHttpサーバを作成し�
 ### TypeScriptコンパイラ（tsc）の設定ファイルの変更
 `example/tsconfig.server.json`{{open}}に以下の変更を行います。<br />
 
-    ```JSON
+    `JSON
     {
         "compilerOptions": {
             "target": "ES2019",
@@ -30,7 +30,7 @@ Expressを使用して、JSONデータを返却するHttpサーバを作成し�
             "./src/server/*",
         ]
     }
-    ```
+    `{{copy}}
 
 ### Expressライブラリのインストール
 `npm install --save express`{{execute}}
@@ -41,7 +41,7 @@ Expressを使用して、JSONデータを返却するHttpサーバを作成し�
 ### ソースファイルの編集
 `example/src/server/server.ts`{{open}}に以下の変更を行います。<br />
 
-    ```TypeScript
+    `
     import express, { Express, Request, Response} from 'express';
 
     class Server {
@@ -71,7 +71,7 @@ Expressを使用して、JSONデータを返却するHttpサーバを作成し�
 
     const server = new Server(port);
     server.start();
-    ```
+    `{{copy}}
 
 ### ビルド
 tscコマンドにて、JavaScriptに変換します<br />
@@ -82,12 +82,12 @@ tscコマンドにて、JavaScriptに変換します<br />
 
 ### package.jsonの修正
 package.jsonのscriptsに追加したほうが少し楽かと思います
-```JSON
+`
   "scripts": {
     "build:server": "tsc -p tsconfig.server.json",
     "start": "node ./dest/server.js 80 &"
   }
-```
+`{{copy}}
 
 package.jsonに蒸気を追加すると、以下のようなコマンドにてビルドやサーバの起動が行えます
 - `npm run build:server`{{execute}}
