@@ -6,16 +6,15 @@
 3. `pwd`{{execute}}
 
 ### 環境初期化
-1. `npm init -y`{{execute}}
+以下のコマンドでpackage.jsonが作成されます
+`npm init -y`{{execute}}
 
 ### TypeScriptのインストール
-1. `npm install --save-dev typescript`{{execute}}
+`npm install --save-dev typescript`{{execute}}
 
 ### ソースディレクトリ
-1. `mkdir src`{{execute}}
+`mkdir src`{{execute}}
 
 ### ビルド出力先ディレクトリ
-1. `mkdir dest`{{execute}}
+`mkdir dest`{{execute}}
 
-### TypeScriptコンパイラの初期設定
-1. `npx tsc --init`{{execute}}
