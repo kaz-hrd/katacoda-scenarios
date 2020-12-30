@@ -11,9 +11,9 @@
  `mv tsconfig.json tsconfig.client.json`{{execute}}
 
 ### TypeScriptコンパイラ（tsc）の設定ファイルの変更
-`example/tsconfig.client.json`{{open}}に以下の変更を行います。<br />
+`example/tsconfig.client.json`{{open}}に以下の変更を行います。
 
-`
+```
 {
   "compilerOptions": {
       "sourceMap": true,
@@ -30,7 +30,7 @@
     "./src/client/*"
   ]
 }
-`{{copy}}
+```{{copy}}
 
 ### ライブラリのインストール
 `npm install --save bootstrap-css-only react react-dom`{{execute}}
@@ -47,7 +47,7 @@
 ### webpackの設定
 `example/webpack.config.js`{{open}}の作成します。以下の設定とします。
 
-`
+```
 const path = require('path');
 
 module.exports = [
@@ -91,4 +91,23 @@ module.exports = [
         devtool: 'inline-source-map',  // sourcemapを使えるようにする
     }
 ]
-`{{copy}}
+```{{copy}}
+
+### style.cssの作成
+`example/src/client/style.css`{{open}}に以下の変更を行います。
+
+```css
+@import '~bootstrap-css-only/css/bootstrap.min.css';
+```{{copy}}
+
+### ソースファイルの編集
+`example/src/client/client.tsx`{{open}}に以下の変更を行います。
+
+```
+import React, { Component } from "react";
+
+import "./style.css";
+
+
+
+```{{copy}}
