@@ -33,10 +33,10 @@
 ```{{copy}}
 
 ### ライブラリのインストール
-`npm install --save bootstrap-css-only react react-dom`{{execute}}
+`npm install --save bootstrap-css-only react react-dom node-fetch`{{execute}}
 
 ### 型定義のインストール
-`npm install --save-dev @types/node @types/reac @types/react-dom`{{execute}}
+`npm install --save-dev @types/node @types/react @types/react-dom @types/node-fetch`{{execute}}
 
 ### webpackと関連プラグインのインストール
 `npm install --save-dev webpack webpack-cli ts-loader css-loader style-loader`{{execute}}
