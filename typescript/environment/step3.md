@@ -51,6 +51,9 @@ class Server {
     }
     start(){
         this._express = express();
+        // index.html
+        this._express.use(express.static('dest/public'));
+        // nowサービス
         this._express.get('/now', (req, res)=> {
             this.processNow(req, res);
         });
@@ -90,7 +93,7 @@ package.jsonのscriptsに追加したほうが少し楽かと思います
 }
 ```{{copy}}
 
-package.jsonに蒸気を追加すると、以下のようなコマンドにてビルドやサーバの起動が行えます
+package.jsonに上記を追加すると、以下のようなコマンドにてビルドやサーバの起動が行えます
 - `npm run build:server`{{execute}}
 - `npm run start`{{execute}}
 

@@ -100,14 +100,86 @@ module.exports = [
 @import '~bootstrap-css-only/css/bootstrap.min.css';
 ```{{copy}}
 
+### index.htmlの作成
+`example/dest/public/index.html`{{open}}を作成します。
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Member</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="./client.js"></script>
+    </body>
+</html>
+```{{copy}}
+
 ### ソースファイルの編集
 `example/src/client/client.tsx`{{open}}に以下の変更を行います。
 
 ```
 import React, { Component } from "react";
-
+import { render } from "react-dom";
 import "./style.css";
 
+interface AppProps { }
+interface AppState {
+    message: string,
+    now: string,
+    show: boolean
+}
 
+class SampleApp extends Component<AppProps, AppState> {
+    constructor(props: AppProps) {
+        super(props);
+        this.state = {
+            message: '', 
+            now: '',
+            show: false
+        }
+        this.execute = this.execute.bind(this);
+    }
 
+    async execute(){
+        const res = await fetch('./now', {method: 'GET'});
+        const data = await res.json() as {message: string, datetime: string};
+        console.dir(data);
+        this.setState({message: data.message, now: data.datetime, show: true});
+    }
+    public render() {
+        return (
+        <div className="container">
+            <div className="row">
+                <div className="col-4">
+                    <button type="button" className="btn btn-primary" onClick={this.execute}>実行</button>
+                </div>
+                {(() => {
+                    if(this.state.show){
+                        return (
+                        <div className="col-6">
+                            {this.state.now}
+                        </div>);
+                    }
+                })()}
+            </div>
+        </div>
+        );
+    }
+}
+
+render(<SampleApp />, document.getElementById("root"));
+```{{copy}}
+
+### ビルド
+`npx webpack`{{execute}}
+
+### package.jsonの修正
+package.jsonのscriptsに追加しておきましょう
+```
+"scripts": {
+    "build:client": "webpack"
+}
 ```{{copy}}
