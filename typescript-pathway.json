@@ -3,9 +3,9 @@
   "description": "Getting Started with TypeScript",
   "courses": [
     {
-      "course_id": "environment",
-      "title": "environment",
-      "description": "environment"
+      "course_id": "threesteps",
+      "title": "最初の３step",
+      "description": "まずは動かして試してみる"
     }
   ]
 }

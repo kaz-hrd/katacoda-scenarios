@@ -1,4 +1,4 @@
-# React
+# Reactを使ったクライアントアプリ
 
 ### ソースディレクトリの作成
 `mkdir src/client`{{execute}}
@@ -177,9 +177,13 @@ render(<SampleApp />, document.getElementById("root"));
 `npx webpack`{{execute}}
 
 ### package.jsonの修正
-package.jsonのscriptsに追加しておきましょう
+package.jsonのscriptsに追加しておきましょう。
 ```
 "scripts": {
     "build:client": "webpack"
 }
 ```{{copy}}
+
+追加することで、
+`npm run build:client`{{execute}}
+を実施することでビルドできるようになります。
